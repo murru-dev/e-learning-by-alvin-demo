@@ -1,0 +1,2198 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-learning by Alvin - Bilingual E-learning Developer & Instructional Designer</title>
+    <meta name="description" content="Bilingual e-learning developer specialized in creating engaging, interactive training solutions for corporate, education, and healthcare sectors using cutting-edge tools and methodologies.">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'ui-sans-serif', 'system-ui', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'Helvetica Neue', 'Arial', 'Noto Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        background: '#ffffff',
+                        foreground: '#0a0a0a',
+                        card: '#ffffff',
+                        'card-foreground': '#0a0a0a',
+                        popover: '#ffffff',
+                        'popover-foreground': '#0a0a0a',
+                        primary: '#030213',
+                        'primary-foreground': '#ffffff',
+                        secondary: '#f1f5f9',
+                        'secondary-foreground': '#030213',
+                        muted: '#f1f5f9',
+                        'muted-foreground': '#64748b',
+                        accent: '#f1f5f9',
+                        'accent-foreground': '#030213',
+                        destructive: '#ef4444',
+                        'destructive-foreground': '#ffffff',
+                        border: 'rgba(0, 0, 0, 0.1)',
+                        input: 'transparent',
+                        ring: '#64748b',
+                        radius: '0.625rem'
+                    }
+                }
+            }
+        }
+    </script>
+    
+    <!-- Lucide Icons CDN -->
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+    
+    <!-- Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        * {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Base typography with increased font sizes for better readability */
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 500;
+            line-height: 1.2;
+        }
+        
+        h2 {
+            font-size: 2rem;
+            font-weight: 500;
+            line-height: 1.3;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        h4 {
+            font-size: 1.25rem;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        
+        p {
+            font-size: 1.125rem;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+        
+        button {
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.5;
+        }
+        
+        .gradient-bg {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, #2563eb 0%, #7c3aed 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .card-hover {
+            transition: all 0.3s ease;
+        }
+        
+        .card-hover:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 0.6s ease-in-out;
+        }
+        
+        .animate-slide-up {
+            animation: slideUp 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes slideUp {
+            from { 
+                opacity: 0; 
+                transform: translateY(30px); 
+            }
+            to { 
+                opacity: 1; 
+                transform: translateY(0); 
+            }
+        }
+        
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            backdrop-filter: blur(4px);
+        }
+        
+        .modal.show {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            max-width: 90vw;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.25);
+            animation: modalSlide 0.3s ease-out;
+        }
+        
+        @keyframes modalSlide {
+            from {
+                opacity: 0;
+                transform: scale(0.9) translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1) translateY(0);
+            }
+        }
+        
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 20px;
+            right: 20px;
+            background-color: #25d366;
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 2px 2px 3px #999;
+            z-index: 100;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background-color: #128c7e;
+        }
+
+        .mobile-menu {
+            display: none;
+        }
+
+        .mobile-menu.show {
+            display: block;
+        }
+
+        @media (max-width: 1024px) {
+            .desktop-nav {
+                display: none;
+            }
+        }
+        
+        .scroll-to-top {
+            position: fixed;
+            bottom: 144px;
+            right: 24px;
+            background: linear-gradient(135deg, #2563eb, #7c3aed);
+            color: white;
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 50;
+            transition: all 0.3s;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+        
+        .scroll-to-top.show {
+            display: flex;
+        }
+        
+        .scroll-to-top:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 640px) {
+            .scroll-to-top {
+                bottom: 32px;
+                right: 80px;
+            }
+        }
+
+        .sheet-overlay {
+            position: fixed;
+            inset: 0;
+            z-index: 50;
+            background-color: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(4px);
+            display: none;
+        }
+
+        .sheet-overlay.show {
+            display: block;
+        }
+
+        .sheet-content {
+            position: fixed;
+            right: 0;
+            top: 0;
+            z-index: 50;
+            height: 100vh;
+            width: 320px;
+            background: white;
+            border-left: 1px solid #e5e7eb;
+            box-shadow: -10px 0 30px rgba(0,0,0,0.1);
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+            padding: 24px;
+            overflow-y: auto;
+        }
+
+        .sheet-content.show {
+            transform: translateX(0);
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: 9999px;
+            border: 1px solid transparent;
+            padding: 0.5rem 0.75rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            line-height: 1;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+        }
+
+        .card {
+            border-radius: 0.75rem;
+            border: 1px solid #e5e7eb;
+            background-color: #ffffff;
+            color: #0f172a;
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+        }
+
+        .card-header {
+            display: flex;
+            flex-direction: column;
+            space-y: 1.5;
+            padding: 1.5rem;
+        }
+
+        .card-content {
+            padding: 1.5rem;
+            padding-top: 0;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            white-space: nowrap;
+            border-radius: 0.375rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.25rem;
+            transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+            transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+            transition-duration: 150ms;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        .button:focus-visible {
+            outline: 2px solid;
+            outline-color: #3b82f6;
+            outline-offset: 2px;
+        }
+
+        .button.primary {
+            background-color: #030213;
+            color: #ffffff;
+            padding: 0.5rem 1rem;
+        }
+
+        .button.primary:hover {
+            background-color: #1f2937;
+        }
+
+        .button.outline {
+            border: 1px solid #d1d5db;
+            background-color: #ffffff;
+            padding: 0.5rem 1rem;
+        }
+
+        .button.outline:hover {
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+
+        .button.ghost {
+            padding: 0.5rem 1rem;
+        }
+
+        .button.ghost:hover {
+            background-color: #f9fafb;
+            color: #1f2937;
+        }
+
+        .button.lg {
+            height: 2.75rem;
+            padding: 0 2rem;
+        }
+    </style>
+</head>
+<body class="bg-white">
+    <!-- Skip to main content link - WCAG 2.2 requirement -->
+    <a href="#main-content" class="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 bg-blue-600 text-white px-4 py-2 rounded-md z-[100] focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        Skip to main content
+    </a>
+
+    <!-- Header -->
+    <header class="bg-white/95 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-50 animate-slide-up" role="banner">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <div class="flex flex-col cursor-pointer" onclick="scrollToSection('home')">
+                    <h1 class="text-xl md:text-2xl gradient-text">
+                        E-learning by Alvin
+                    </h1>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <nav class="desktop-nav hidden lg:flex items-center space-x-4" role="navigation" aria-label="Main navigation">
+                    <button onclick="scrollToSection('services')" class="nav-item text-gray-700 hover:text-blue-600 transition-colors relative focus:outline-none rounded-md px-2 py-2 text-base" data-section="services">
+                        Services
+                    </button>
+                    <button onclick="scrollToSection('portfolio')" class="nav-item text-gray-700 hover:text-blue-600 transition-colors relative focus:outline-none rounded-md px-2 py-2 text-base" data-section="portfolio">
+                        Portfolio
+                    </button>
+                    <button onclick="scrollToSection('testimonials')" class="nav-item text-gray-700 hover:text-blue-600 transition-colors relative focus:outline-none rounded-md px-2 py-2 text-base" data-section="testimonials">
+                        Testimonials
+                    </button>
+                    <button onclick="scrollToSection('about')" class="nav-item text-gray-700 hover:text-blue-600 transition-colors relative focus:outline-none rounded-md px-2 py-2 text-base" data-section="about">
+                        About
+                    </button>
+                    <button onclick="scrollToSection('contact')" class="nav-item text-gray-700 hover:text-blue-600 transition-colors relative focus:outline-none rounded-md px-2 py-2 text-base" data-section="contact">
+                        Contact
+                    </button>
+                </nav>
+
+                <!-- Desktop Actions -->
+                <div class="hidden lg:flex items-center space-x-3">
+                    <!-- Upwork Button -->
+                    <button onclick="handleUpworkClick()" class="button outline border-green-500 text-green-600 hover:bg-green-50 hover:border-green-600 shadow-sm focus:outline-none text-base px-4 py-2 focus:ring-2 focus:ring-green-500 focus:ring-offset-2" aria-label="Hire on Upwork">
+                        <i data-lucide="external-link" class="w-4 h-4 mr-2"></i>
+                        Upwork
+                    </button>
+
+                    <!-- Book Call Button -->
+                    <button onclick="handleBookCall()" class="button bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white shadow-lg focus:outline-none text-base px-5 py-2 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" aria-label="Book a Call">
+                        <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                        Book a Call
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="lg:hidden flex items-center">
+                    <button id="mobileMenuToggle" class="button ghost focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" aria-label="Open navigation menu">
+                        <i data-lucide="menu" class="w-6 h-6"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Sheet Overlay -->
+    <div id="sheetOverlay" class="sheet-overlay"></div>
+
+    <!-- Mobile Sheet Content -->
+    <div id="sheetContent" class="sheet-content" role="dialog" aria-labelledby="mobile-menu-title">
+        <div class="flex flex-col space-y-6">
+            <div class="flex justify-between items-center">
+                <h2 id="mobile-menu-title" class="text-lg font-semibold">Navigation Menu</h2>
+                <button id="closeSheet" class="text-gray-400 hover:text-gray-600">
+                    <i data-lucide="x" class="w-6 h-6"></i>
+                </button>
+            </div>
+
+            <!-- Mobile Navigation -->
+            <nav role="navigation" aria-label="Mobile navigation" class="space-y-2">
+                <button onclick="scrollToSection('services'); closeSheet()" class="mobile-nav-item text-left text-gray-700 hover:text-blue-600 transition-colors p-3 w-full focus:outline-none rounded-md border-l-4 hover:border-l-blue-600 hover:bg-blue-50 text-base border-l-transparent" data-section="services">
+                    Services
+                </button>
+                <button onclick="scrollToSection('portfolio'); closeSheet()" class="mobile-nav-item text-left text-gray-700 hover:text-blue-600 transition-colors p-3 w-full focus:outline-none rounded-md border-l-4 hover:border-l-blue-600 hover:bg-blue-50 text-base border-l-transparent" data-section="portfolio">
+                    Portfolio
+                </button>
+                <button onclick="scrollToSection('testimonials'); closeSheet()" class="mobile-nav-item text-left text-gray-700 hover:text-blue-600 transition-colors p-3 w-full focus:outline-none rounded-md border-l-4 hover:border-l-blue-600 hover:bg-blue-50 text-base border-l-transparent" data-section="testimonials">
+                    Testimonials
+                </button>
+                <button onclick="scrollToSection('about'); closeSheet()" class="mobile-nav-item text-left text-gray-700 hover:text-blue-600 transition-colors p-3 w-full focus:outline-none rounded-md border-l-4 hover:border-l-blue-600 hover:bg-blue-50 text-base border-l-transparent" data-section="about">
+                    About
+                </button>
+                <button onclick="scrollToSection('contact'); closeSheet()" class="mobile-nav-item text-left text-gray-700 hover:text-blue-600 transition-colors p-3 w-full focus:outline-none rounded-md border-l-4 hover:border-l-blue-600 hover:bg-blue-50 text-base border-l-transparent" data-section="contact">
+                    Contact
+                </button>
+            </nav>
+
+            <!-- Mobile CTAs -->
+            <div class="pt-6 border-t border-gray-200 space-y-3">
+                <!-- Mobile Upwork Button -->
+                <button onclick="handleUpworkClick(); closeSheet()" class="button outline w-full border-green-500 text-green-600 hover:bg-green-50 hover:border-green-600 focus:outline-none text-base py-3 focus:ring-2 focus:ring-green-500 focus:ring-offset-2" aria-label="Hire on Upwork">
+                    <i data-lucide="external-link" class="w-4 h-4 mr-2"></i>
+                    Hire Me on Upwork
+                </button>
+
+                <!-- Mobile Book Call Button -->
+                <button onclick="handleBookCall(); closeSheet()" class="button w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white focus:outline-none text-base py-3 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2" aria-label="Book a Call">
+                    <i data-lucide="calendar" class="w-4 h-4 mr-2"></i>
+                    Book a Call
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <main id="main-content" role="main">
+        <!-- Hero Section -->
+        <section id="home" class="pt-16 bg-gradient-to-br from-blue-50 to-purple-50 min-h-screen flex items-center">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="animate-slide-up">
+                        <div class="badge bg-blue-100 text-blue-800 mb-6">
+                            <i data-lucide="zap" class="w-4 h-4 mr-2"></i>
+                            Trusted E-learning Professional
+                        </div>
+                        <h1 class="text-5xl md:text-6xl mb-6 text-gray-900 leading-tight">
+                            Hi, I'm Alvin — <span class="gradient-text">E-learning Developer & Instructional Designer</span>
+                        </h1>
+                        <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                            I create interactive training solutions using Articulate Storyline, Rise 360, and AI tools.
+                        </p>
+                        
+                        <!-- Achievement badges -->
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-center text-gray-700">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i>
+                                <span>Trusted by DIRECTV, AT&T, VRIO</span>
+                            </div>
+                            <div class="flex items-center text-gray-700">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i>
+                                <span>Specialized in corporate, education & healthcare training</span>
+                            </div>
+                            <div class="flex items-center text-gray-700">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i>
+                                <span>Bilingual: English & Spanish</span>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="scrollToSection('portfolio')" class="bg-blue-600 text-white px-8 py-4 rounded-lg font-semibold hover:bg-blue-700 transition-colors text-center">
+                                View My Demos
+                            </button>
+                            <button onclick="handleUpworkClick()" class="border border-green-500 text-green-600 px-8 py-4 rounded-lg font-semibold hover:bg-green-50 transition-colors text-center">
+                                Hire Me on Upwork
+                            </button>
+                        </div>
+                        
+                        <div class="mt-6">
+                            <div class="badge bg-green-100 text-green-800">
+                                <div class="w-2 h-2 bg-green-500 rounded-full mr-2"></div>
+                                Available for projects
+                            </div>
+                        </div>
+                    </div>
+                    <div class="animate-fade-in">
+                        <div class="relative">
+                            <div class="absolute inset-0 bg-gradient-to-r from-blue-400 to-purple-500 rounded-2xl transform rotate-6"></div>
+                            <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                                 alt="Professional e-learning developer workspace" 
+                                 class="relative bg-white p-4 rounded-2xl shadow-2xl w-full">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Clients Section -->
+        <section class="py-16 bg-white relative overflow-hidden" role="region" aria-labelledby="clients-heading">
+            <!-- Background decoration -->
+            <div class="absolute inset-0 bg-gradient-to-r from-blue-50/50 to-purple-50/50" aria-hidden="true"></div>
+
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+                <div class="text-center mb-12 animate-slide-up">
+                    <div class="badge bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 mb-4">
+                        <i data-lucide="award" class="w-4 h-4 mr-2"></i>
+                        Trusted Partners
+                    </div>
+                    <h2 id="clients-heading" class="text-3xl md:text-4xl mb-4 text-gray-900">
+                        Trusted by Global Brands
+                    </h2>
+                    <p class="text-gray-600 max-w-2xl mx-auto">
+                        Delivering exceptional e-learning solutions for industry leaders across telecommunications, media, and technology sectors
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
+                    <!-- Client 1 -->
+                    <a href="https://www.naonow.com/" target="_blank" rel="noopener noreferrer" class="group block">
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-blue-200 group-hover:bg-gradient-to-br group-hover:from-blue-50 group-hover:to-white">
+                            <div class="text-lg font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
+                                NAO Now
+                            </div>
+                            <div class="text-sm text-gray-500 mb-2">
+                                Digital Innovation
+                            </div>
+                            <div class="text-xs text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Visit website →
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Client 2 -->
+                    <a href="https://chameleonassociates.com/" target="_blank" rel="noopener noreferrer" class="group block">
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-blue-200 group-hover:bg-gradient-to-br group-hover:from-blue-50 group-hover:to-white">
+                            <div class="text-lg font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
+                                Chameleon Associates
+                            </div>
+                            <div class="text-sm text-gray-500 mb-2">
+                                Consulting
+                            </div>
+                            <div class="text-xs text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Visit website →
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Client 3 -->
+                    <a href="https://thelvlupacademy.com/" target="_blank" rel="noopener noreferrer" class="group block">
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-blue-200 group-hover:bg-gradient-to-br group-hover:from-blue-50 group-hover:to-white">
+                            <div class="text-lg font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
+                                LVL UP Academy
+                            </div>
+                            <div class="text-sm text-gray-500 mb-2">
+                                Education
+                            </div>
+                            <div class="text-xs text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Visit website →
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Client 4 -->
+                    <a href="https://www.jjadvocates.org/" target="_blank" rel="noopener noreferrer" class="group block">
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-blue-200 group-hover:bg-gradient-to-br group-hover:from-blue-50 group-hover:to-white">
+                            <div class="text-lg font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
+                                JJ Advocates
+                            </div>
+                            <div class="text-sm text-gray-500 mb-2">
+                                Legal Services
+                            </div>
+                            <div class="text-xs text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Visit website →
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Client 5 -->
+                    <a href="https://geniuspublicity.com/" target="_blank" rel="noopener noreferrer" class="group block">
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-blue-200 group-hover:bg-gradient-to-br group-hover:from-blue-50 group-hover:to-white">
+                            <div class="text-lg font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
+                                Genius Publicity
+                            </div>
+                            <div class="text-sm text-gray-500 mb-2">
+                                Marketing
+                            </div>
+                            <div class="text-xs text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Visit website →
+                            </div>
+                        </div>
+                    </a>
+
+                    <!-- Client 6 -->
+                    <a href="https://www.estherparkconsulting.com/" target="_blank" rel="noopener noreferrer" class="group block">
+                        <div class="bg-white p-6 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-100 group-hover:border-blue-200 group-hover:bg-gradient-to-br group-hover:from-blue-50 group-hover:to-white">
+                            <div class="text-lg font-bold text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
+                                Esther Park Consulting
+                            </div>
+                            <div class="text-sm text-gray-500 mb-2">
+                                Consulting
+                            </div>
+                            <div class="text-xs text-blue-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                Visit website →
+                            </div>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Success metrics -->
+                <div class="mt-16 grid grid-cols-2 md:grid-cols-4 gap-8 text-center animate-slide-up" role="region" aria-labelledby="metrics-heading">
+                    <h3 id="metrics-heading" class="sr-only">Success Metrics</h3>
+                    <div>
+                        <div class="text-3xl md:text-4xl text-blue-600 mb-2" aria-label="Learners Trained: 500,000 or more">
+                            500K+
+                        </div>
+                        <div class="text-gray-600 text-sm">Learners Trained</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl text-purple-600 mb-2" aria-label="Projects Delivered: 50 or more">
+                            50+
+                        </div>
+                        <div class="text-gray-600 text-sm">Projects Delivered</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl text-green-600 mb-2" aria-label="Client Satisfaction: 98 percent">
+                            98%
+                        </div>
+                        <div class="text-gray-600 text-sm">Client Satisfaction</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl md:text-4xl text-orange-600 mb-2" aria-label="Upwork Rating: 5.0 out of 5">
+                            5.0
+                        </div>
+                        <div class="text-gray-600 text-sm">Upwork Rating</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Services Section -->
+        <section id="services" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 animate-slide-up">
+                    <div class="badge bg-blue-100 text-blue-800 mb-4">
+                        <i data-lucide="target" class="w-4 h-4 mr-2"></i>
+                        My Expertise
+                    </div>
+                    <h2 class="text-4xl md:text-5xl mb-4 text-gray-900">
+                        What I Can Help You With
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Instructional Design & Interactive Training Solutions that drive real results
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- Service 1: Custom E-learning Development -->
+                    <div class="card-hover card">
+                        <div class="h-2 bg-gradient-to-r from-blue-400 to-blue-600"></div>
+                        <div class="card-header">
+                            <div class="w-16 h-16 bg-gradient-to-r from-blue-400 to-blue-600 rounded-xl flex items-center justify-center text-white mb-4">
+                                <i data-lucide="brain" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl text-gray-900 mb-3">Custom E-learning Development</h3>
+                        </div>
+                        <div class="card-content space-y-4">
+                            <p class="text-gray-600 leading-relaxed">
+                                Interactive courses with Articulate Storyline & SCORM compliance for seamless LMS integration
+                            </p>
+                            
+                            <div class="space-y-2">
+                                <h4 class="sr-only">Key Features</h4>
+                                <ul class="space-y-2" role="list">
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        SCORM Compliant
+                                    </li>
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        Interactive Elements
+                                    </li>
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        Multi-device Support
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Timeline - visible outside modal -->
+                            <div class="bg-white border-2 border-gray-100 rounded-lg p-3 mt-4">
+                                <div class="flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-4 h-4 mr-2 text-blue-500"></i>
+                                    <span class="text-sm font-semibold text-gray-700">
+                                        Typical timeline: 2-6 weeks depending on complexity
+                                    </span>
+                                </div>
+                            </div>
+
+                            <button onclick="openModal('service1')" class="flex items-center text-blue-600 hover:text-blue-700 transition-colors mt-4">
+                                <span class="text-sm">Learn more</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 2: Multimedia Content & Video -->
+                    <div class="card-hover card">
+                        <div class="h-2 bg-gradient-to-r from-purple-400 to-purple-600"></div>
+                        <div class="card-header">
+                            <div class="w-16 h-16 bg-gradient-to-r from-purple-400 to-purple-600 rounded-xl flex items-center justify-center text-white mb-4">
+                                <i data-lucide="video" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl text-gray-900 mb-3">Multimedia Content & Video</h3>
+                        </div>
+                        <div class="card-content space-y-4">
+                            <p class="text-gray-600 leading-relaxed">
+                                AI voiceover, animated explainers, and scenario-based demos that engage learners
+                            </p>
+                            
+                            <div class="space-y-2">
+                                <h4 class="sr-only">Key Features</h4>
+                                <ul class="space-y-2" role="list">
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        AI Voiceover
+                                    </li>
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        Animations
+                                    </li>
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        Scenario-based
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Timeline - visible outside modal -->
+                            <div class="bg-white border-2 border-gray-100 rounded-lg p-3 mt-4">
+                                <div class="flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-4 h-4 mr-2 text-blue-500"></i>
+                                    <span class="text-sm font-semibold text-gray-700">
+                                        Typical timeline: 1-4 weeks depending on scope
+                                    </span>
+                                </div>
+                            </div>
+
+                            <button onclick="openModal('service2')" class="flex items-center text-blue-600 hover:text-blue-700 transition-colors mt-4">
+                                <span class="text-sm">Learn more</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 3: Training Materials -->
+                    <div class="card-hover card">
+                        <div class="h-2 bg-gradient-to-r from-green-400 to-green-600"></div>
+                        <div class="card-header">
+                            <div class="w-16 h-16 bg-gradient-to-r from-green-400 to-green-600 rounded-xl flex items-center justify-center text-white mb-4">
+                                <i data-lucide="book-open" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl text-gray-900 mb-3">Training Materials</h3>
+                        </div>
+                        <div class="card-content space-y-4">
+                            <p class="text-gray-600 leading-relaxed">
+                                Professional PDF guides, job aids, workbooks and handouts for comprehensive learning
+                            </p>
+                            
+                            <div class="space-y-2">
+                                <h4 class="sr-only">Key Features</h4>
+                                <ul class="space-y-2" role="list">
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        PDF Guides
+                                    </li>
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        Job Aids
+                                    </li>
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        Workbooks
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Timeline - visible outside modal -->
+                            <div class="bg-white border-2 border-gray-100 rounded-lg p-3 mt-4">
+                                <div class="flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-4 h-4 mr-2 text-blue-500"></i>
+                                    <span class="text-sm font-semibold text-gray-700">
+                                        Typical timeline: 1-3 weeks per material set
+                                    </span>
+                                </div>
+                            </div>
+
+                            <button onclick="openModal('service3')" class="flex items-center text-blue-600 hover:text-blue-700 transition-colors mt-4">
+                                <span class="text-sm">Learn more</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Service 4: Course Redesign -->
+                    <div class="card-hover card">
+                        <div class="h-2 bg-gradient-to-r from-orange-400 to-orange-600"></div>
+                        <div class="card-header">
+                            <div class="w-16 h-16 bg-gradient-to-r from-orange-400 to-orange-600 rounded-xl flex items-center justify-center text-white mb-4">
+                                <i data-lucide="refresh-cw" class="w-8 h-8"></i>
+                            </div>
+                            <h3 class="text-xl text-gray-900 mb-3">Course Redesign</h3>
+                        </div>
+                        <div class="card-content space-y-4">
+                            <p class="text-gray-600 leading-relaxed">
+                                Modernize outdated content into engaging, mobile-ready formats that drive results
+                            </p>
+                            
+                            <div class="space-y-2">
+                                <h4 class="sr-only">Key Features</h4>
+                                <ul class="space-y-2" role="list">
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        Mobile-ready
+                                    </li>
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        Modern Design
+                                    </li>
+                                    <li class="flex items-center text-sm text-gray-600">
+                                        <div class="w-1.5 h-1.5 bg-blue-500 rounded-full mr-2"></div>
+                                        Improved Engagement
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <!-- Timeline - visible outside modal -->
+                            <div class="bg-white border-2 border-gray-100 rounded-lg p-3 mt-4">
+                                <div class="flex items-center justify-center">
+                                    <i data-lucide="clock" class="w-4 h-4 mr-2 text-blue-500"></i>
+                                    <span class="text-sm font-semibold text-gray-700">
+                                        Typical timeline: 2-4 weeks depending on content volume
+                                    </span>
+                                </div>
+                            </div>
+
+                            <button onclick="openModal('service4')" class="flex items-center text-blue-600 hover:text-blue-700 transition-colors mt-4">
+                                <span class="text-sm">Learn more</span>
+                                <i data-lucide="arrow-right" class="w-4 h-4 ml-1"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Stats section -->
+                <div class="mt-20 grid grid-cols-1 md:grid-cols-3 gap-8 animate-slide-up" role="region" aria-labelledby="stats-heading">
+                    <h3 id="stats-heading" class="sr-only">Success Statistics</h3>
+                    <div class="text-center">
+                        <div class="text-4xl mb-2 text-blue-600" aria-label="Projects Completed: 50 or more">
+                            50+
+                        </div>
+                        <div class="text-gray-600">Projects Completed</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-2 text-purple-600" aria-label="Happy Clients: 15 or more">
+                            15+
+                        </div>
+                        <div class="text-gray-600">Happy Clients</div>
+                    </div>
+                    <div class="text-center">
+                        <div class="text-4xl mb-2 text-green-600" aria-label="Languages Supported: 2">
+                            2
+                        </div>
+                        <div class="text-gray-600">Languages Supported</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 animate-slide-up">
+                    <div class="badge bg-purple-100 text-purple-800 mb-4">
+                        <i data-lucide="layers" class="w-4 h-4 mr-2"></i>
+                        My Work
+                    </div>
+                    <h2 class="text-4xl md:text-5xl mb-4 text-gray-900">
+                        Explore My Portfolio
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Real projects made with Articulate 360, showcasing interactive learning experiences
+                    </p>
+                </div>
+
+                <!-- Portfolio Filter Tabs -->
+                <div class="flex justify-center mb-12">
+                    <div class="flex space-x-2 bg-white rounded-lg p-1 shadow-sm border">
+                        <button onclick="filterPortfolio('all')" class="portfolio-filter active px-4 py-2 rounded-md text-sm font-medium transition-colors" data-filter="all">
+                            All Projects
+                        </button>
+                        <button onclick="filterPortfolio('corporate')" class="portfolio-filter px-4 py-2 rounded-md text-sm font-medium transition-colors" data-filter="corporate">
+                            Corporate
+                        </button>
+                        <button onclick="filterPortfolio('healthcare')" class="portfolio-filter px-4 py-2 rounded-md text-sm font-medium transition-colors" data-filter="healthcare">
+                            Healthcare
+                        </button>
+                        <button onclick="filterPortfolio('education')" class="portfolio-filter px-4 py-2 rounded-md text-sm font-medium transition-colors" data-filter="education">
+                            Education
+                        </button>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8" id="portfolioGrid">
+                    <!-- Portfolio Item 1 -->
+                    <div class="portfolio-item card-hover card" data-category="corporate">
+                        <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Corporate Safety Training" 
+                             class="w-full h-48 object-cover rounded-t-xl">
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="badge bg-blue-100 text-blue-800">Corporate</span>
+                                <button class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
+                                    <i data-lucide="play" class="w-3 h-3 mr-1 inline"></i>
+                                    Preview
+                                </button>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Corporate Safety Training</h3>
+                            <p class="text-gray-600 mb-4">
+                                Interactive SCORM course for workplace safety protocols with real-world scenarios
+                            </p>
+                            <div class="text-sm text-gray-500">
+                                <strong>Client:</strong> Fortune 500 Company
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 2 -->
+                    <div class="portfolio-item card-hover card" data-category="healthcare">
+                        <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Healthcare Compliance Module" 
+                             class="w-full h-48 object-cover rounded-t-xl">
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="badge bg-red-100 text-red-800">Healthcare</span>
+                                <button class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
+                                    <i data-lucide="play" class="w-3 h-3 mr-1 inline"></i>
+                                    Preview
+                                </button>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Healthcare Compliance Module</h3>
+                            <p class="text-gray-600 mb-4">
+                                Mobile-responsive training for medical professionals with certification tracking
+                            </p>
+                            <div class="text-sm text-gray-500">
+                                <strong>Client:</strong> Regional Hospital
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 3 -->
+                    <div class="portfolio-item card-hover card" data-category="corporate">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Sales Training Program" 
+                             class="w-full h-48 object-cover rounded-t-xl">
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="badge bg-purple-100 text-purple-800">Corporate</span>
+                                <button class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
+                                    <i data-lucide="play" class="w-3 h-3 mr-1 inline"></i>
+                                    Preview
+                                </button>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Sales Training Program</h3>
+                            <p class="text-gray-600 mb-4">
+                                Scenario-based learning with branching narratives and performance analytics
+                            </p>
+                            <div class="text-sm text-gray-500">
+                                <strong>Client:</strong> Tech Startup
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 4 -->
+                    <div class="portfolio-item card-hover card" data-category="education">
+                        <img src="https://images.unsplash.com/photo-1523050854058-8df90110c9f1?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="University Onboarding" 
+                             class="w-full h-48 object-cover rounded-t-xl">
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="badge bg-green-100 text-green-800">Education</span>
+                                <button class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
+                                    <i data-lucide="play" class="w-3 h-3 mr-1 inline"></i>
+                                    Preview
+                                </button>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">University Onboarding</h3>
+                            <p class="text-gray-600 mb-4">
+                                Comprehensive orientation program for new students with gamification elements
+                            </p>
+                            <div class="text-sm text-gray-500">
+                                <strong>Client:</strong> State University
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 5 -->
+                    <div class="portfolio-item card-hover card" data-category="healthcare">
+                        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1f?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Patient Care Excellence" 
+                             class="w-full h-48 object-cover rounded-t-xl">
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="badge bg-red-100 text-red-800">Healthcare</span>
+                                <button class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
+                                    <i data-lucide="play" class="w-3 h-3 mr-1 inline"></i>
+                                    Preview
+                                </button>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Patient Care Excellence</h3>
+                            <p class="text-gray-600 mb-4">
+                                Empathy-driven training for healthcare workers with emotional intelligence focus
+                            </p>
+                            <div class="text-sm text-gray-500">
+                                <strong>Client:</strong> Healthcare Network
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Portfolio Item 6 -->
+                    <div class="portfolio-item card-hover card" data-category="corporate">
+                        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Leadership Development" 
+                             class="w-full h-48 object-cover rounded-t-xl">
+                        <div class="p-6">
+                            <div class="flex items-center gap-2 mb-3">
+                                <span class="badge bg-blue-100 text-blue-800">Corporate</span>
+                                <button class="bg-green-100 text-green-800 px-2 py-1 rounded text-xs font-medium">
+                                    <i data-lucide="play" class="w-3 h-3 mr-1 inline"></i>
+                                    Preview
+                                </button>
+                            </div>
+                            <h3 class="text-xl font-bold text-gray-900 mb-2">Leadership Development</h3>
+                            <p class="text-gray-600 mb-4">
+                                Executive training program with 360-degree feedback and coaching elements
+                            </p>
+                            <div class="text-sm text-gray-500">
+                                <strong>Client:</strong> Executive Institute
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- View Full Portfolio CTA -->
+                <div class="text-center mt-12">
+                    <button onclick="handleUpworkClick()" class="button lg bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+                        <i data-lucide="external-link" class="w-5 h-5 mr-2"></i>
+                        View My Full Portfolio on Upwork
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials Section -->
+        <section id="testimonials" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 animate-slide-up">
+                    <div class="badge bg-green-100 text-green-800 mb-4">
+                        <i data-lucide="users" class="w-4 h-4 mr-2"></i>
+                        Client Success Stories
+                    </div>
+                    <h2 class="text-4xl md:text-5xl mb-4 text-gray-900">
+                        What Clients Are Saying
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Feedback from verified Upwork projects and long-term partnerships
+                    </p>
+                </div>
+
+                <!-- Stats Row -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16 text-center">
+                    <div>
+                        <div class="text-3xl font-bold text-blue-600 mb-2">98%</div>
+                        <div class="text-sm text-gray-600">Client Satisfaction</div>
+                        <div class="text-xs text-gray-500 mt-1">Based on Upwork reviews</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-purple-600 mb-2">5.0</div>
+                        <div class="text-sm text-gray-600">Average Rating</div>
+                        <div class="text-xs text-gray-500 mt-1">Across all projects</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-green-600 mb-2">100%</div>
+                        <div class="text-sm text-gray-600">On-time Delivery</div>
+                        <div class="text-xs text-gray-500 mt-1">Never missed a deadline</div>
+                    </div>
+                    <div>
+                        <div class="text-3xl font-bold text-orange-600 mb-2">50+</div>
+                        <div class="text-sm text-gray-600">Projects Completed</div>
+                        <div class="text-xs text-gray-500 mt-1">And counting</div>
+                    </div>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                    <!-- Testimonial 1 -->
+                    <div class="card-hover card p-6">
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6">
+                            "Alvin exceeded our expectations with his professionalism and speed. The interactive training modules he created significantly improved our employee engagement rates by 40%. His attention to detail and understanding of our corporate culture was impressive."
+                        </p>
+                        <div class="border-t pt-4">
+                            <div class="flex items-center mb-2">
+                                <img src="https://images.unsplash.com/photo-1494790108755-2616b612b1e3?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" 
+                                     alt="Sarah Johnson" 
+                                     class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Sarah Johnson</h4>
+                                    <p class="text-sm text-gray-600">Learning & Development Manager</p>
+                                    <p class="text-sm font-semibold text-blue-600">AT&T</p>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500 space-y-1">
+                                <div><strong>Project Type:</strong> Corporate Training</div>
+                                <div><strong>Completed in:</strong> 3 weeks</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 2 -->
+                    <div class="card-hover card p-6">
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6">
+                            "Creative, proactive, and incredibly reliable! Alvin transformed our outdated content into engaging interactive modules that our employees actually enjoy. The bilingual capabilities were exactly what we needed for our diverse workforce."
+                        </p>
+                        <div class="border-t pt-4">
+                            <div class="flex items-center mb-2">
+                                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" 
+                                     alt="Carlos Rodriguez" 
+                                     class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Carlos Rodriguez</h4>
+                                    <p class="text-sm text-gray-600">Training Director</p>
+                                    <p class="text-sm font-semibold text-blue-600">VRIO</p>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500 space-y-1">
+                                <div><strong>Project Type:</strong> Content Redesign</div>
+                                <div><strong>Completed in:</strong> 2 weeks</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Testimonial 3 -->
+                    <div class="card-hover card p-6">
+                        <div class="flex items-center text-yellow-500 mb-4">
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                            <i data-lucide="star" class="w-5 h-5 fill-current"></i>
+                        </div>
+                        <p class="text-gray-600 mb-6">
+                            "Highly skilled with Storyline and voice integration. Alvin created a comprehensive compliance training program that not only met regulatory requirements but also engaged our medical staff. The scenario-based approach was brilliant."
+                        </p>
+                        <div class="border-t pt-4">
+                            <div class="flex items-center mb-2">
+                                <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?ixlib=rb-4.0.3&auto=format&fit=crop&w=150&q=80" 
+                                     alt="Dr. Maria Garcia" 
+                                     class="w-12 h-12 rounded-full mr-4">
+                                <div>
+                                    <h4 class="font-semibold text-gray-900">Dr. Maria Garcia</h4>
+                                    <p class="text-sm text-gray-600">Head of Medical Education</p>
+                                    <p class="text-sm font-semibold text-blue-600">Regional Healthcare Network</p>
+                                </div>
+                            </div>
+                            <div class="text-xs text-gray-500 space-y-1">
+                                <div><strong>Project Type:</strong> Healthcare Compliance</div>
+                                <div><strong>Completed in:</strong> 4 weeks</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- CTA to Upwork Reviews -->
+                <div class="text-center mt-12">
+                    <div class="mb-4">
+                        <h3 class="text-xl font-semibold mb-2">See More Reviews on Upwork</h3>
+                        <p class="text-gray-600">Check out my complete profile with 50+ verified client reviews</p>
+                    </div>
+                    <button onclick="handleUpworkClick()" class="button lg bg-green-600 text-white hover:bg-green-700 transition-colors">
+                        <i data-lucide="external-link" class="w-5 h-5 mr-2"></i>
+                        Visit My Upwork Profile
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="py-20 bg-gray-50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <div class="animate-slide-up">
+                        <div class="badge bg-orange-100 text-orange-800 mb-6">
+                            <i data-lucide="award" class="w-4 h-4 mr-2"></i>
+                            Meet Your E-learning Partner
+                        </div>
+                        <h2 class="text-4xl md:text-5xl mb-6 text-gray-900">
+                            About Me
+                        </h2>
+                        <p class="text-xl text-gray-600 mb-6">
+                            Passionate about creating engaging, impactful learning experiences
+                        </p>
+                        
+                        <div class="space-y-6 mb-8">
+                            <p class="text-gray-600">
+                                Hi! I'm Alvin — a bilingual (English/Spanish) eLearning developer and instructional designer with over 5 years of experience creating interactive training content for healthcare, education, and corporate clients across the U.S., Latin America, and Europe.
+                            </p>
+                            <p class="text-gray-600">
+                                I specialize in adult learning, creative instructional design, and full course development using tools like Articulate Storyline, Rise, and Figma. I'm proactive, detail-oriented, and passionate about designing engaging content that makes a real impact, especially in mission-driven environments like healthcare and nonprofit work.
+                            </p>
+                        </div>
+
+                        <!-- Achievements -->
+                        <div class="space-y-3 mb-8">
+                            <div class="flex items-center text-gray-700">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i>
+                                <span>Trusted by DIRECTV, AT&T, VRIO</span>
+                            </div>
+                            <div class="flex items-center text-gray-700">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i>
+                                <span>Bilingual | Available for global projects</span>
+                            </div>
+                            <div class="flex items-center text-gray-700">
+                                <i data-lucide="check-circle" class="w-5 h-5 text-green-500 mr-3"></i>
+                                <span>Responsive within 2–4 hours</span>
+                            </div>
+                        </div>
+
+                        <!-- Technical Skills -->
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold mb-4">Technical Expertise</h3>
+                            <div class="grid grid-cols-2 gap-4">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-700">Articulate Storyline 360</span>
+                                    <span class="badge bg-green-100 text-green-800">Expert</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-700">Articulate Rise 360</span>
+                                    <span class="badge bg-green-100 text-green-800">Expert</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-700">Instructional Design</span>
+                                    <span class="badge bg-blue-100 text-blue-800">Advanced</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-700">AI Voice Integration</span>
+                                    <span class="badge bg-blue-100 text-blue-800">Advanced</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-700">SCORM Compliance</span>
+                                    <span class="badge bg-blue-100 text-blue-800">Advanced</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-700">Bilingual Content</span>
+                                    <span class="badge bg-purple-100 text-purple-800">Native</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Industry Experience -->
+                        <div class="mb-8">
+                            <h3 class="text-lg font-semibold mb-4">Industries I Serve</h3>
+                            <div class="grid grid-cols-3 gap-4">
+                                <div class="text-center">
+                                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                        <i data-lucide="heart" class="w-6 h-6 text-red-600"></i>
+                                    </div>
+                                    <h4 class="font-medium text-gray-900 mb-1">Healthcare</h4>
+                                    <p class="text-sm text-gray-600">Medical training & compliance</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                        <i data-lucide="briefcase" class="w-6 h-6 text-blue-600"></i>
+                                    </div>
+                                    <h4 class="font-medium text-gray-900 mb-1">Corporate</h4>
+                                    <p class="text-sm text-gray-600">Employee development</p>
+                                </div>
+                                <div class="text-center">
+                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mx-auto mb-2">
+                                        <i data-lucide="graduation-cap" class="w-6 h-6 text-green-600"></i>
+                                    </div>
+                                    <h4 class="font-medium text-gray-900 mb-1">Education</h4>
+                                    <p class="text-sm text-gray-600">Academic & institutional</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Stats -->
+                        <div class="grid grid-cols-4 gap-4 mb-8 text-center">
+                            <div>
+                                <div class="text-2xl font-bold text-blue-600">5+</div>
+                                <div class="text-sm text-gray-600">Years Exp.</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-purple-600">50+</div>
+                                <div class="text-sm text-gray-600">Projects</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-green-600">98%</div>
+                                <div class="text-sm text-gray-600">Satisfaction</div>
+                            </div>
+                            <div>
+                                <div class="text-2xl font-bold text-orange-600">2-4h</div>
+                                <div class="text-sm text-gray-600">Response</div>
+                            </div>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="scrollToSection('portfolio')" class="button lg bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+                                View My Demos
+                            </button>
+                            <button onclick="handleUpworkClick()" class="button lg outline border-green-500 text-green-600 hover:bg-green-50 transition-colors">
+                                Hire Me on Upwork
+                            </button>
+                        </div>
+                    </div>
+                    <div class="animate-fade-in">
+                        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" 
+                             alt="Professional e-learning developer workspace" 
+                             class="rounded-2xl shadow-2xl w-full">
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="py-20 bg-gradient-to-br from-blue-600 via-purple-600 to-indigo-700 relative overflow-hidden" role="region" aria-labelledby="cta-heading">
+            <!-- Background decoration -->
+            <div class="absolute inset-0" aria-hidden="true">
+                <div class="absolute top-10 left-10 w-20 h-20 bg-white/10 rounded-full"></div>
+                <div class="absolute top-32 right-20 w-16 h-16 bg-white/10 rounded-full"></div>
+                <div class="absolute bottom-20 left-20 w-24 h-24 bg-white/10 rounded-full"></div>
+                <div class="absolute bottom-10 right-10 w-12 h-12 bg-white/10 rounded-full"></div>
+            </div>
+
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative">
+                <div class="animate-slide-up">
+                    <div class="badge bg-white/20 text-white mb-6">
+                        <i data-lucide="star" class="w-4 h-4 mr-2"></i>
+                        Ready to Start Your Project?
+                    </div>
+
+                    <h2 id="cta-heading" class="text-4xl md:text-5xl mb-6 text-white">
+                        Ready to Elevate Your Training?
+                    </h2>
+
+                    <p class="text-xl text-blue-100 mb-8 max-w-2xl mx-auto">
+                        Let's create engaging e-learning experiences that drive real results for your organization. From concept to completion, I'll be your trusted partner.
+                    </p>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="handleUpworkClick()" class="button lg bg-white text-blue-600 hover:bg-gray-100 shadow-lg transform hover:scale-105 transition-all focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+                            <i data-lucide="external-link" class="w-5 h-5 mr-2"></i>
+                            Hire Me on Upwork
+                        </button>
+                        <button onclick="handleBookCall()" class="button lg border-2 border-white text-white hover:bg-white hover:text-blue-600 transition-all transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-blue-600">
+                            <i data-lucide="calendar" class="w-5 h-5 mr-2"></i>
+                            Book a Discovery Call
+                        </button>
+                    </div>
+
+                    <p class="text-blue-200 mt-6 text-sm">
+                        Free consultation • Fast response • Bilingual support
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="py-20 bg-white">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16 animate-slide-up">
+                    <div class="badge bg-blue-100 text-blue-800 mb-4">
+                        <i data-lucide="mail" class="w-4 h-4 mr-2"></i>
+                        Get in Touch
+                    </div>
+                    <h2 class="text-4xl md:text-5xl mb-4 text-gray-900">
+                        Let's Connect
+                    </h2>
+                    <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                        Ready to create engaging e-learning experiences? Let's discuss your project!
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+                    <!-- Contact Methods -->
+                    <div class="animate-slide-up">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">How to Reach Me</h3>
+                        
+                        <!-- Contact Options -->
+                        <div class="space-y-6 mb-8">
+                            <!-- Upwork -->
+                            <div class="bg-green-50 p-6 rounded-xl border border-green-200">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center mr-4">
+                                        <i data-lucide="external-link" class="w-6 h-6 text-green-600"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-gray-900 mb-2">Hire on Upwork</h4>
+                                        <p class="text-gray-600 mb-3">Browse my portfolio and hire me directly</p>
+                                        <button onclick="handleUpworkClick()" class="button primary">
+                                            Visit Profile
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Book Call -->
+                            <div class="bg-blue-50 p-6 rounded-xl border border-blue-200">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center mr-4">
+                                        <i data-lucide="calendar" class="w-6 h-6 text-blue-600"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-gray-900 mb-2">Book a Call</h4>
+                                        <p class="text-gray-600 mb-3">Schedule a free 30-minute consultation</p>
+                                        <button onclick="handleBookCall()" class="button primary">
+                                            Book Now
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Quick Message -->
+                            <div class="bg-purple-50 p-6 rounded-xl border border-purple-200">
+                                <div class="flex items-start">
+                                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center mr-4">
+                                        <i data-lucide="message-circle" class="w-6 h-6 text-purple-600"></i>
+                                    </div>
+                                    <div class="flex-1">
+                                        <h4 class="font-semibold text-gray-900 mb-2">Quick Message</h4>
+                                        <p class="text-gray-600 mb-3">Send me a message for quick questions</p>
+                                        <button onclick="scrollToForm()" class="button primary">
+                                            Send Message
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Info -->
+                        <div class="border-t pt-6">
+                            <h4 class="font-semibold text-gray-900 mb-4">Quick Info</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center text-gray-600">
+                                    <i data-lucide="clock" class="w-5 h-5 mr-3 text-blue-500"></i>
+                                    <span>Usually responds within 2-4 hours</span>
+                                </div>
+                                <div class="flex items-center text-gray-600">
+                                    <i data-lucide="globe" class="w-5 h-5 mr-3 text-green-500"></i>
+                                    <span>Available for global projects</span>
+                                </div>
+                                <div class="flex items-center text-gray-600">
+                                    <i data-lucide="users" class="w-5 h-5 mr-3 text-purple-500"></i>
+                                    <span>Bilingual: English & Spanish</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Contact Form -->
+                    <div class="animate-fade-in">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-6">Send Me a Message</h3>
+                        <form id="contactForm" class="space-y-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div>
+                                    <label for="fullName" class="block text-sm font-medium text-gray-700 mb-2">Full Name</label>
+                                    <input type="text" id="fullName" name="fullName" required
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                </div>
+                                <div>
+                                    <label for="email" class="block text-sm font-medium text-gray-700 mb-2">Email Address</label>
+                                    <input type="email" id="email" name="email" required
+                                           class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                </div>
+                            </div>
+                            <div>
+                                <label for="company" class="block text-sm font-medium text-gray-700 mb-2">Company/Organization</label>
+                                <input type="text" id="company" name="company"
+                                       class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                            </div>
+                            <div>
+                                <label for="projectType" class="block text-sm font-medium text-gray-700 mb-2">Project Type</label>
+                                <select id="projectType" name="projectType" required
+                                        class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                                    <option value="">Select project type</option>
+                                    <option value="custom-elearning">Custom E-learning Course</option>
+                                    <option value="course-redesign">Course Redesign/Modernization</option>
+                                    <option value="training-video">Training Video Production</option>
+                                    <option value="learning-materials">Learning Materials Development</option>
+                                    <option value="consultation">Consultation & Strategy</option>
+                                    <option value="other">Other</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label for="projectDetails" class="block text-sm font-medium text-gray-700 mb-2">Project Details</label>
+                                <textarea id="projectDetails" name="projectDetails" rows="5" required
+                                          class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                          placeholder="Tell me about your e-learning project, timeline, and any specific requirements..."></textarea>
+                            </div>
+                            <div class="bg-blue-50 p-4 rounded-lg">
+                                <p class="text-blue-800 text-sm">
+                                    <i data-lucide="info" class="w-4 h-4 inline mr-2"></i>
+                                    I'll respond within 24 hours with a detailed proposal
+                                </p>
+                            </div>
+                            <button type="submit" id="submitBtn" 
+                                    class="w-full button lg bg-blue-600 text-white hover:bg-blue-700 transition-colors">
+                                <span id="submitText">Send Message</span>
+                                <span id="submitLoading" class="hidden">Sending...</span>
+                            </button>
+                        </form>
+
+                        <!-- Success Message -->
+                        <div id="successMessage" class="hidden mt-6 p-6 bg-green-50 border border-green-200 rounded-lg">
+                            <div class="text-center">
+                                <i data-lucide="check-circle" class="w-12 h-12 text-green-500 mx-auto mb-4"></i>
+                                <h3 class="text-lg font-semibold text-green-900 mb-2">Message Sent Successfully!</h3>
+                                <p class="text-green-700 mb-4">Thank you for reaching out! I'll get back to you within 24 hours.</p>
+                                <div class="flex gap-4 justify-center">
+                                    <button onclick="resetForm()" class="button outline">
+                                        Send Another Message
+                                    </button>
+                                    <button onclick="handleBookCall()" class="button primary">
+                                        Book a Call Instead
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16" role="contentinfo">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="md:col-span-2">
+                    <h3 class="text-2xl mb-4 gradient-text">
+                        E-learning by Alvin
+                    </h3>
+                    <p class="text-gray-400 mb-6 max-w-md leading-relaxed">
+                        Bilingual e-learning developer specialized in creating engaging, interactive training solutions for corporate, education, and healthcare sectors using cutting-edge tools and methodologies.
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="bg-blue-600 p-2 rounded-lg hover:bg-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900" aria-label="Visit Upwork Profile">
+                            <i data-lucide="external-link" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 p-2 rounded-lg hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900" aria-label="LinkedIn Profile">
+                            <i data-lucide="linkedin" class="w-4 h-4"></i>
+                        </a>
+                        <a href="#" class="bg-gray-700 p-2 rounded-lg hover:bg-gray-600 transition-colors focus:outline-none focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:ring-offset-gray-900" aria-label="Email Contact">
+                            <i data-lucide="mail" class="w-4 h-4"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="mb-4 text-lg">Services</h4>
+                    <nav aria-label="Footer services navigation">
+                        <ul class="space-y-2 text-gray-400">
+                            <li>
+                                <a href="#services" class="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md px-1 py-1">
+                                    E-learning Development
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#services" class="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md px-1 py-1">
+                                    Course Redesign
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#services" class="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md px-1 py-1">
+                                    Multimedia Content
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#services" class="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md px-1 py-1">
+                                    Training Materials
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+
+                <div>
+                    <h4 class="mb-4 text-lg">Quick Links</h4>
+                    <nav aria-label="Footer quick links navigation">
+                        <ul class="space-y-2 text-gray-400">
+                            <li>
+                                <a href="#portfolio" class="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md px-1 py-1">
+                                    Portfolio
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#testimonials" class="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md px-1 py-1">
+                                    Testimonials
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#contact" class="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md px-1 py-1">
+                                    Contact
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="hover:text-white transition-colors focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-900 rounded-md px-1 py-1">
+                                    Privacy Policy
+                                </a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-8 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <p class="text-gray-400 text-sm flex items-center">
+                        © 2025 E-learning by Alvin. Made with 
+                        <i data-lucide="heart" class="w-4 h-4 mx-1 text-red-500"></i>
+                        for better learning.
+                    </p>
+                    <div class="flex items-center space-x-4 mt-4 md:mt-0">
+                        <div class="badge bg-gray-700 text-gray-300">
+                            <i data-lucide="globe" class="w-3 h-3 mr-1"></i>
+                            Available Worldwide
+                        </div>
+                        <div class="badge bg-gray-700 text-gray-300">
+                            <i data-lucide="users" class="w-3 h-3 mr-1"></i>
+                            English & Spanish
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scroll to top button -->
+    <button id="scrollToTop" class="scroll-to-top" onclick="scrollToTop()" aria-label="Scroll to top" title="Scroll to top">
+        <i data-lucide="arrow-up" class="w-5 h-5"></i>
+    </button>
+
+    <!-- WhatsApp Floating Button -->
+    <a href="https://wa.me/15551234567?text=Hi%20Alvin!%20I'm%20interested%20in%20your%20e-learning%20development%20services.%20I'd%20like%20to%20discuss%20a%20potential%20project." 
+       class="whatsapp-float" 
+       target="_blank" 
+       rel="noopener noreferrer" 
+       aria-label="Chat with me on WhatsApp">
+        <i data-lucide="message-circle" class="w-8 h-8"></i>
+    </a>
+
+    <!-- Service Modals -->
+    <div id="serviceModal" class="modal">
+        <div class="modal-content w-full max-w-4xl mx-4">
+            <div id="modalBody" class="p-8">
+                <!-- Modal content will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script>
+        // Initialize Lucide icons
+        lucide.createIcons();
+
+        // Global state
+        let activeSection = 'home';
+        let currentPortfolioFilter = 'all';
+        
+        // Service modal data
+        const serviceModals = {
+            service1: {
+                title: 'Custom E-learning Development',
+                description: 'Transform your training materials into engaging, interactive learning experiences that drive real results and improve knowledge retention.',
+                content: `
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">What You'll Receive</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Complete SCORM-compliant course package</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Source files for future updates</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Implementation guide and documentation</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"></div>
+                                    <span>User training materials</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-blue-500 rounded-full mt-2 mr-3"></div>
+                                    <span>30-day post-delivery support</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">My Development Process</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">1</div>
+                                    <span>Discovery & Analysis: Understanding your goals, audience, and content</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">2</div>
+                                    <span>Instructional Design: Creating learning paths and interactive scenarios</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">3</div>
+                                    <span>Visual Development: Custom graphics, animations, and branding</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">4</div>
+                                    <span>SCORM Integration: Ensuring compatibility with your LMS</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">5</div>
+                                    <span>Testing & Refinement: Quality assurance and user testing</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-blue-100 text-blue-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">6</div>
+                                    <span>Delivery & Support: Full course deployment and ongoing support</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                cta: 'Ready to create your custom course?'
+            },
+            service2: {
+                title: 'Multimedia Content & Video Production',
+                description: 'Bring your training content to life with professional multimedia elements that capture attention and enhance learning outcomes.',
+                content: `
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Multimedia Capabilities</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3"></div>
+                                    <span>AI Voiceover Generation: Natural-sounding narration in English and Spanish</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3"></div>
+                                    <span>2D Animations: Custom graphics and motion graphics</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Screen Recordings: Software tutorials and product demos</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Interactive Scenarios: Branching storylines and decision trees</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Video Editing: Professional post-production and effects</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-purple-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Audio Enhancement: Background music and sound effects</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Perfect For</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-purple-900 mb-2">Product Demonstrations</h5>
+                                    <p class="text-sm text-purple-700">Software training and product demos</p>
+                                </div>
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-purple-900 mb-2">Compliance Training</h5>
+                                    <p class="text-sm text-purple-700">Real-world scenarios and decision trees</p>
+                                </div>
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-purple-900 mb-2">Onboarding Programs</h5>
+                                    <p class="text-sm text-purple-700">New employee orientation</p>
+                                </div>
+                                <div class="bg-purple-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-purple-900 mb-2">Safety Training</h5>
+                                    <p class="text-sm text-purple-700">Visual demonstrations and procedures</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                cta: 'Let\'s create engaging multimedia content!'
+            },
+            service3: {
+                title: 'Training Materials Development',
+                description: 'Comprehensive learning resources that support and reinforce your training programs with professional design and clear instructional content.',
+                content: `
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Types of Materials</h4>
+                            <ul class="space-y-2">
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Instructor Guides: Comprehensive facilitation materials with timing and activities</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Participant Workbooks: Interactive exercises and note-taking spaces</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Quick Reference Guides: Essential information for on-the-job support</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Job Aids: Step-by-step procedures and checklists</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Assessment Tools: Quizzes, evaluations, and competency checks</span>
+                                </li>
+                                <li class="flex items-start">
+                                    <div class="w-2 h-2 bg-green-500 rounded-full mt-2 mr-3"></div>
+                                    <span>Infographics: Visual summaries of key concepts and processes</span>
+                                </li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Design Features</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-green-900 mb-2">Professional Branding</h5>
+                                    <p class="text-sm text-green-700">Consistent visual identity and professional presentation</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-green-900 mb-2">Accessible Design</h5>
+                                    <p class="text-sm text-green-700">Following WCAG 2.2 guidelines for accessibility</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-green-900 mb-2">Multi-format Output</h5>
+                                    <p class="text-sm text-green-700">Print-ready and digital formats available</p>
+                                </div>
+                                <div class="bg-green-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-green-900 mb-2">Interactive Elements</h5>
+                                    <p class="text-sm text-green-700">Forms, bookmarks, and clickable links</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                cta: 'Need professional training materials?'
+            },
+            service4: {
+                title: 'Course Redesign & Modernization',
+                description: 'Transform your existing training content into modern, engaging, and effective learning experiences that meet today\'s learner expectations.',
+                content: `
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Redesign Process</h4>
+                            <div class="space-y-3">
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">1</div>
+                                    <span>Content Audit: Analyzing existing materials for strengths and gaps</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">2</div>
+                                    <span>Learning Objectives Review: Aligning content with measurable outcomes</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">3</div>
+                                    <span>Modern Design Application: Implementing contemporary UX/UI principles</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">4</div>
+                                    <span>Interactive Elements: Adding engaging activities and assessments</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">5</div>
+                                    <span>Mobile Optimization: Ensuring perfect performance across all devices</span>
+                                </div>
+                                <div class="flex items-center">
+                                    <div class="w-8 h-8 bg-orange-100 text-orange-600 rounded-full flex items-center justify-center text-sm font-semibold mr-3">6</div>
+                                    <span>Performance Testing: Validating improved engagement and learning outcomes</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div>
+                            <h4 class="text-lg font-semibold text-gray-900 mb-3">Transformation Examples</h4>
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-orange-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-orange-900 mb-2">PowerPoint → Interactive Course</h5>
+                                    <p class="text-sm text-orange-700">Static presentations become engaging Storyline modules</p>
+                                </div>
+                                <div class="bg-orange-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-orange-900 mb-2">PDFs → Visual Modules</h5>
+                                    <p class="text-sm text-orange-700">Text-heavy documents become interactive learning</p>
+                                </div>
+                                <div class="bg-orange-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-orange-900 mb-2">Linear → Branching</h5>
+                                    <p class="text-sm text-orange-700">Traditional content becomes scenario-based</p>
+                                </div>
+                                <div class="bg-orange-50 p-4 rounded-lg">
+                                    <h5 class="font-medium text-orange-900 mb-2">Desktop → Mobile Ready</h5>
+                                    <p class="text-sm text-orange-700">Old courses become responsive and accessible</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                `,
+                cta: 'Ready to modernize your training content?'
+            }
+        };
+
+        // Navigation Functions
+        function scrollToSection(sectionId) {
+            const element = document.getElementById(sectionId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth' });
+                updateActiveSection(sectionId);
+            }
+        }
+
+        function updateActiveSection(sectionId) {
+            activeSection = sectionId;
+            
+            // Update desktop nav
+            document.querySelectorAll('.nav-item').forEach(item => {
+                if (item.dataset.section === sectionId) {
+                    item.classList.add('text-blue-600', 'font-medium');
+                    item.classList.remove('text-gray-700');
+                } else {
+                    item.classList.remove('text-blue-600', 'font-medium');
+                    item.classList.add('text-gray-700');
+                }
+            });
+
+            // Update mobile nav
+            document.querySelectorAll('.mobile-nav-item').forEach(item => {
+                if (item.dataset.section === sectionId) {
+                    item.classList.add('border-l-blue-600', 'bg-blue-50', 'text-blue-600', 'font-medium');
+                    item.classList.remove('border-l-transparent');
+                } else {
+                    item.classList.remove('border-l-blue-600', 'bg-blue-50', 'text-blue-600', 'font-medium');
+                    item.classList.add('border-l-transparent');
+                }
+            });
+        }
+
+        // External link handlers
+        function handleUpworkClick() {
+            window.open('https://www.upwork.com/freelancers/~your-upwork-profile', '_blank');
+        }
+
+        function handleBookCall() {
+            window.open('https://calendly.com/your-calendar-link', '_blank');
+        }
+
+        // Mobile menu functions
+        function openSheet() {
+            document.getElementById('sheetOverlay').classList.add('show');
+            document.getElementById('sheetContent').classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeSheet() {
+            document.getElementById('sheetOverlay').classList.remove('show');
+            document.getElementById('sheetContent').classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Modal functions
+        function openModal(serviceKey) {
+            const modal = document.getElementById('serviceModal');
+            const modalBody = document.getElementById('modalBody');
+            const data = serviceModals[serviceKey];
+            
+            modalBody.innerHTML = `
+                <div class="flex justify-between items-start mb-6">
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-900 mb-2">${data.title}</h2>
+                        <p class="text-gray-600">${data.description}</p>
+                    </div>
+                    <button onclick="closeModal()" class="text-gray-400 hover:text-gray-600 text-2xl">&times;</button>
+                </div>
+                ${data.content}
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <a href="#contact" onclick="closeModal(); scrollToSection('contact')" class="bg-blue-600 text-white px-8 py-3 rounded-lg font-semibold hover:bg-blue-700 transition-colors inline-block">
+                        ${data.cta}
+                    </a>
+                </div>
+            `;
+            
+            modal.classList.add('show');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('serviceModal');
+            modal.classList.remove('show');
+            document.body.style.overflow = 'auto';
+        }
+
+        // Portfolio filter function
+        function filterPortfolio(category) {
+            currentPortfolioFilter = category;
+            
+            // Update filter buttons
+            document.querySelectorAll('.portfolio-filter').forEach(btn => {
+                if (btn.dataset.filter === category) {
+                    btn.classList.add('active', 'bg-blue-600', 'text-white');
+                    btn.classList.remove('text-gray-600', 'hover:text-gray-900');
+                } else {
+                    btn.classList.remove('active', 'bg-blue-600', 'text-white');
+                    btn.classList.add('text-gray-600', 'hover:text-gray-900');
+                }
+            });
+
+            // Filter portfolio items
+            document.querySelectorAll('.portfolio-item').forEach(item => {
+                if (category === 'all' || item.dataset.category === category) {
+                    item.style.display = 'block';
+                } else {
+                    item.style.display = 'none';
+                }
+            });
+        }
+
+        // Contact form functions
+        function scrollToForm() {
+            const form = document.getElementById('contactForm');
+            if (form) {
+                form.scrollIntoView({ behavior: 'smooth' });
+                form.querySelector('#fullName').focus();
+            }
+        }
+
+        function resetForm() {
+            document.getElementById('contactForm').reset();
+            document.getElementById('contactForm').style.display = 'block';
+            document.getElementById('successMessage').classList.add('hidden');
+        }
+
+        // Scroll to top function
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Scroll tracking
+        function handleScroll() {
+            const sections = ['home', 'services', 'portfolio', 'testimonials', 'about', 'contact'];
+            const scrollPosition = window.scrollY + 100;
+
+            for (const sectionId of sections) {
+                const element = document.getElementById(sectionId);
+                if (element) {
+                    const { offsetTop, offsetHeight } = element;
+                    if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
+                        updateActiveSection(sectionId);
+                        break;
+                    }
+                }
+            }
+
+            // Show/hide scroll to top button
+            const scrollToTopBtn = document.getElementById('scrollToTop');
+            if (window.scrollY > 500) {
+                scrollToTopBtn.classList.add('show');
+            } else {
+                scrollToTopBtn.classList.remove('show');
+            }
+        }
+
+        // Event listeners
+        document.addEventListener('DOMContentLoaded', function() {
+            // Mobile menu toggle
+            document.getElementById('mobileMenuToggle').addEventListener('click', openSheet);
+            document.getElementById('closeSheet').addEventListener('click', closeSheet);
+            document.getElementById('sheetOverlay').addEventListener('click', closeSheet);
+
+            // Close modal when clicking outside
+            document.getElementById('serviceModal').addEventListener('click', function(event) {
+                if (event.target === this) {
+                    closeModal();
+                }
+            });
+
+            // Contact form submission
+            document.getElementById('contactForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+                
+                // Show loading state
+                document.getElementById('submitText').style.display = 'none';
+                document.getElementById('submitLoading').classList.remove('hidden');
+                document.getElementById('submitBtn').disabled = true;
+                
+                // Simulate form submission
+                setTimeout(() => {
+                    // Hide form and show success message
+                    this.style.display = 'none';
+                    document.getElementById('successMessage').classList.remove('hidden');
+                    
+                    // Reset button state
+                    document.getElementById('submitText').style.display = 'inline';
+                    document.getElementById('submitLoading').classList.add('hidden');
+                    document.getElementById('submitBtn').disabled = false;
+                }, 2000);
+            });
+
+            // Scroll tracking
+            window.addEventListener('scroll', handleScroll);
+
+            // Initialize Lucide icons
+            lucide.createIcons();
+        });
+
+        // Keyboard navigation for modals
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape') {
+                closeModal();
+                closeSheet();
+            }
+        });
+    </script>
+</body>
+</html>
